@@ -37,15 +37,9 @@ bower_components
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 # Config directories
 configs/
 
->>>>>>> Initial Commit
-=======
->>>>>>> Initial commit
 # Dependency directories
 node_modules/
 jspm_packages/
@@ -110,12 +104,4 @@ dist
 .dynamodb/
 
 # TernJS port file
-<<<<<<< HEAD
-<<<<<<< HEAD
 .tern-port
-=======
-.tern-port
->>>>>>> Initial Commit
-=======
-.tern-port
->>>>>>> Initial commit
