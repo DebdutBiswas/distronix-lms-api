@@ -1,0 +1,38 @@
+{
+  "name": "distronix-lms-api",
+  "version": "1.0.0",
+  "description": "Library Managemnt System API",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "nodemon app.js"
+  },
+  "dependencies": {
+    "express": "^4.17.2",
+    "body-parser": "^1.19.1",
+    "jsonwebtoken": "^8.5.1",
+    "uuid": "^8.3.2",
+    "mongoose": "^6.1.5"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0",
+    "nodemon": "^2.0.15"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DebdutBiswas/distronix-lms-api.git"
+  },
+  "keywords": [
+    "node.js",
+    "lms",
+    "library",
+    "management",
+    "system"
+  ],
+  "author": "Debdut Biswas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DebdutBiswas/distronix-lms-api/issues"
+  },
+  "homepage": "https://github.com/DebdutBiswas/distronix-lms-api#readme"
+}
