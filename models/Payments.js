@@ -1,50 +1,46 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('Users', {
+  return sequelize.define('Payments', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       primaryKey: true
     },
-    username: {
-      type: DataTypes.STRING(255),
-      allowNull: false,
-      unique: "username"
-    },
-    password: {
-      type: DataTypes.STRING(65),
-      allowNull: false
-    },
-    name: {
-      type: DataTypes.STRING(255),
-      allowNull: false
-    },
-    active: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: 0
-    },
-    role: {
-      type: DataTypes.TINYINT.UNSIGNED,
+    record_id: {
+      type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       references: {
-        model: 'Roles',
+        model: 'Records',
         key: 'id'
       }
     },
-    reg_by: {
+    pay_amount: {
       type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: true
+      allowNull: false,
+      defaultValue: 0
     },
-    reg_date: {
+    pay_date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+    },
+    updated_by: {
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: false,
+      references: {
+        model: 'Users',
+        key: 'id'
+      }
+    },
+    updated_on: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
     }
   }, {
     sequelize,
-    tableName: 'Users',
+    tableName: 'Payments',
     timestamps: false,
     indexes: [
       {
@@ -56,26 +52,17 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "username",
-        unique: true,
+        name: "RecordId_Attribute_On_Records",
         using: "BTREE",
         fields: [
-          { name: "username" },
+          { name: "record_id" },
         ]
       },
       {
-        name: "id",
-        unique: true,
+        name: "UserId_Attribute_On_Users",
         using: "BTREE",
         fields: [
-          { name: "id" },
-        ]
-      },
-      {
-        name: "Role_Attribute_On_Roles",
-        using: "BTREE",
-        fields: [
-          { name: "role" },
+          { name: "updated_by" },
         ]
       },
     ]

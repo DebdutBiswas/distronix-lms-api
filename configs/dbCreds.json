@@ -1,0 +1,8 @@
+{
+    "dbHost": "dummy",
+    "dbPort": "3306",
+    "dbType": "mysql",
+    "dbUser": "dummy",
+    "dbPassword": "dummy",
+    "dbDatabase": "dummy"
+}

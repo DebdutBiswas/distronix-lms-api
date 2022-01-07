@@ -1,50 +1,63 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('Users', {
+  return sequelize.define('Records', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       primaryKey: true
     },
-    username: {
-      type: DataTypes.STRING(255),
+    book_id: {
+      type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
-      unique: "username"
+      references: {
+        model: 'Books',
+        key: 'id'
+      }
     },
-    password: {
-      type: DataTypes.STRING(65),
+    user_id: {
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: false,
+      references: {
+        model: 'Users',
+        key: 'id'
+      }
+    },
+    lent_date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+    },
+    due_date: {
+      type: DataTypes.DATE,
       allowNull: false
     },
-    name: {
-      type: DataTypes.STRING(255),
-      allowNull: false
-    },
-    active: {
+    overdue: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: 0
     },
-    role: {
-      type: DataTypes.TINYINT.UNSIGNED,
+    returned: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: 0
+    },
+    updated_by: {
+      type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       references: {
-        model: 'Roles',
+        model: 'Users',
         key: 'id'
       }
     },
-    reg_by: {
-      type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: true
-    },
-    reg_date: {
+    updated_on: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
     }
   }, {
     sequelize,
-    tableName: 'Users',
+    tableName: 'Records',
     timestamps: false,
     indexes: [
       {
@@ -56,26 +69,24 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "username",
-        unique: true,
+        name: "BookId_Attribute_On_Books",
         using: "BTREE",
         fields: [
-          { name: "username" },
+          { name: "book_id" },
         ]
       },
       {
-        name: "id",
-        unique: true,
+        name: "UpdatedBy_Attribute_On_Users",
         using: "BTREE",
         fields: [
-          { name: "id" },
+          { name: "updated_by" },
         ]
       },
       {
-        name: "Role_Attribute_On_Roles",
+        name: "UserId_Attribute2_On_Users",
         using: "BTREE",
         fields: [
-          { name: "role" },
+          { name: "user_id" },
         ]
       },
     ]

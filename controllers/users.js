@@ -23,3 +23,11 @@ exports.updateUserById = async (req, res) => {
 exports.deleteUserById = async (req, res) => {
 
 };
+
+exports.getToken = async (req, res) => {
+
+};
+
+exports.refreshToken = async (req, res) => {
+
+};
