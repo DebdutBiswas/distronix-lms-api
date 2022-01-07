@@ -1,4 +1,5 @@
 const DataTypes = require("sequelize").DataTypes;
+
 const _Books = require("./books");
 const _Payments = require("./payments");
 const _Records = require("./records");

@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const dbConfig = require('./configs/database');
+const db = require('./configs/database');
 
 const usersRouter = require('./routes/users');
 const booksRouter = require('./routes/books');
@@ -9,7 +9,7 @@ const recordsRouter = require('./routes/records');
 const paymentsRouter = require('./routes/payments');
 const statisticsRouter = require('./routes/statistics');
 
-dbConfig.authenticate().then(() => {
+db.authenticate().then(() => {
         console.log('Database connected...');
     }).catch(err => {
         console.log('Error: ' + err);

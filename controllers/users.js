@@ -4,8 +4,10 @@
 // router.put('/:id', usersController.updateUserById);
 // router.delete('/:id', usersController.deleteUserById);
 
-exports.getAllUsers = async (req, res) => {
+const db = require('./configs/database');
 
+exports.getAllUsers = async (req, res) => {
+    
 };
 
 exports.addNewUser = async (req, res) => {
