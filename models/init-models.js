@@ -7,7 +7,7 @@ const _Roles = require("./roles");
 const _Subjects = require("./subjects");
 const _Users = require("./users");
 
-function initModels(sequelize) {
+async function initModels(sequelize) {
   const Books = _Books(sequelize, DataTypes);
   const Payments = _Payments(sequelize, DataTypes);
   const Records = _Records(sequelize, DataTypes);
@@ -30,6 +30,8 @@ function initModels(sequelize) {
   Records.belongsTo(Users, { as: "user", foreignKey: "user_id"});
   Users.hasMany(Records, { as: "user_Records", foreignKey: "user_id"});
 
+  await sequelize.sync();
+
   return {
     Books,
     Payments,
@@ -39,6 +41,9 @@ function initModels(sequelize) {
     Users,
   };
 }
+
+
+
 module.exports = initModels;
 module.exports.initModels = initModels;
 module.exports.default = initModels;
