@@ -4,6 +4,10 @@
 // router.put('/:id', usersController.updateUserById);
 // router.delete('/:id', usersController.deleteUserById);
 
+// auth
+// router.post('/getToken', usersController.getToken);
+// router.post('/refreshToken', usersController.refreshToken);
+
 const { DataTypes, Op } = require('sequelize');
 const { sha256HashGen, sha256HashCheck } = require('../utils/hashlib');
 const db = require('../configs/database');
@@ -13,7 +17,12 @@ const usersModel = _usersModel(db, DataTypes);
 exports.getAllUsers = async (req, res) => {
     await usersModel.findAll({attributes: {exclude: ['password']}, order: [['id', 'DESC']]})
     .then(users => {
-        res.send({'data': users});
+        if (users !== null) res.send({'data': users});
+        else {
+            res.status(500).send({
+                message: 'No users exist!'
+            });
+        }
     })
     .catch(err => {
         res.status(500).send({
@@ -40,17 +49,22 @@ exports.addNewUser = async (req, res) => {
     .then(async queryResult => {
         await usersModel.findOne({where: {id: queryResult.id}, attributes: {exclude: ['password']}})
         .then(user => {
-            res.send({'data': user});
+            if (user !== null) res.send({'data': user});
+            else {
+                res.status(500).send({
+                    message: 'The user does not exist!'
+                });
+            }
         })
         .catch(err => {
             res.status(500).send({
-                message: err.message || 'Something went wrong while getting the user!'
+                message: err.message || 'Something went wrong while getting the newly created user!'
             });
         });
     })
     .catch(err => {
         res.status(500).send({
-            message: err.message || 'Something went wrong while creating newly created user!'
+            message: err.message || 'Something went wrong while creating new user!'
         });
     });
 };
@@ -58,7 +72,12 @@ exports.addNewUser = async (req, res) => {
 exports.getUserById = async (req, res) => {
     await usersModel.findOne({where: {id: req.params.id}, attributes: {exclude: ['password']}})
     .then(user => {
-        res.send({'data': user});
+        if (user !== null) res.send({'data': user});
+        else {
+            res.status(500).send({
+                message: 'The user does not exist!'
+            });
+        }
     })
     .catch(err => {
         res.status(500).send({
@@ -85,7 +104,12 @@ exports.updateUserById = async (req, res) => {
         [ updateResult ] = queryResult;
         await usersModel.findOne({where: {id: req.params.id}, attributes: {exclude: ['password']}})
         .then(user => {
-            res.send({'data': user, 'updated': updateResult});
+            if (user !== null) res.send({'data': user, 'updated': updateResult});
+            else {
+                res.status(500).send({
+                    message: 'The user does not exist!'
+                });
+            }
         })
         .catch(err => {
             res.status(500).send({
@@ -106,7 +130,11 @@ exports.deleteUserById = async (req, res) => {
         await usersModel.destroy({where: {id: req.params.id}})
         .then(async queryResult => {
             if (queryResult) res.send({'data': user, 'deleted': queryResult});
-            else res.send({'deleted': queryResult});
+            else {
+                res.status(500).send({
+                    message: 'The user does not exist!'
+                });
+            }
         })
         .catch(err => {
             res.status(500).send({
@@ -116,7 +144,7 @@ exports.deleteUserById = async (req, res) => {
     })
     .catch(err => {
         res.status(500).send({
-            message: err.message || 'Something went wrong while getting the user!'
+            message: err.message || 'Something went wrong while getting the deleted user!'
         });
     });
 };
