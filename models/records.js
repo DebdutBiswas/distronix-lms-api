@@ -32,11 +32,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: false
     },
-    overdue: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: 0
-    },
     returned: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
