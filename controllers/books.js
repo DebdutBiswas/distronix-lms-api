@@ -106,7 +106,7 @@ exports.updateBookById = async (req, res) => {
         [ updateResult ] = queryResult;
         await booksModel.findOne({where: {id: req.params.id}})
         .then(book => {
-            if (book !== null) res.send({'data': book, 'updated': updateResult});
+            if (book !== null) res.send({'data': {...book.dataValues, 'updated': updateResult}});
             else {
                 res.status(500).send({
                     message: 'The book does not exist!'
@@ -131,7 +131,7 @@ exports.deleteBookById = async (req, res) => {
     .then(async book => {
         await booksModel.destroy({where: {id: req.params.id}})
         .then(async queryResult => {
-            if (queryResult) res.send({'data': book, 'deleted': queryResult});
+            if (queryResult) res.send({'data': {...book.dataValues, 'deleted': queryResult}});
             else {
                 res.status(500).send({
                     message: 'The book does not exist!'

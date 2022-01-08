@@ -106,7 +106,7 @@ exports.updateUserById = async (req, res) => {
         [ updateResult ] = queryResult;
         await usersModel.findOne({where: {id: req.params.id}, attributes: {exclude: ['password']}})
         .then(user => {
-            if (user !== null) res.send({'data': user, 'updated': updateResult});
+            if (user !== null) res.send({'data': {...user.dataValues, 'updated': updateResult}});
             else {
                 res.status(500).send({
                     message: 'The user does not exist!'
@@ -131,7 +131,7 @@ exports.deleteUserById = async (req, res) => {
     .then(async user => {
         await usersModel.destroy({where: {id: req.params.id}})
         .then(async queryResult => {
-            if (queryResult) res.send({'data': user, 'deleted': queryResult});
+            if (queryResult) res.send({'data': {...user.dataValues, 'deleted': queryResult}});
             else {
                 res.status(500).send({
                     message: 'The user does not exist!'
