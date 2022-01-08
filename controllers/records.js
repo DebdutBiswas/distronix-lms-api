@@ -23,7 +23,9 @@ exports.getAllRecords = async (req, res) => {
                 message: 'No records exist!'
             });
         } else  {
-            res.send({'data': records});
+            res.send({
+                'data': records.map(record => ({...record.dataValues, 'overdue': daysDueCheck(record.dataValues.due_date)}))
+            });
         }
     })
     .catch(err => {
