@@ -12,16 +12,18 @@ const { DataTypes, Op } = require('sequelize');
 const { sha256HashGen, sha256HashCheck } = require('../utils/hashlib');
 const db = require('../configs/database');
 const _usersModel = require('../models/users');
+
 const usersModel = _usersModel(db, DataTypes);
 
 exports.getAllUsers = async (req, res) => {
     await usersModel.findAll({attributes: {exclude: ['password']}, order: [['id', 'DESC']]})
     .then(users => {
-        if (users !== null) res.send({'data': users});
-        else {
+        if (users === null || users.length === 0) {
             res.status(500).send({
                 message: 'No users exist!'
             });
+        } else {
+            res.send({'data': users});
         }
     })
     .catch(err => {
