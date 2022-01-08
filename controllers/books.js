@@ -7,16 +7,18 @@
 const { DataTypes, Op } = require('sequelize');
 const db = require('../configs/database');
 const _booksModel = require('../models/books');
+
 const booksModel = _booksModel(db, DataTypes);
 
 exports.getAllBooks = async (req, res) => {
     await booksModel.findAll({order: [['id', 'DESC']]})
     .then(books => {
-        if (books !== null) res.send({'data': books});
-        else {
+        if (books === null || books.length === 0) {
             res.status(500).send({
                 message: 'No books exist!'
             });
+        } else {
+            res.send({'data': books});
         }
     })
     .catch(err => {
