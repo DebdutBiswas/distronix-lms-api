@@ -1,17 +1,13 @@
-const getTimeStamp = (date = true, time = true) => {
+const getTimeStamp = (isTime) => {
     const currentDateTime = new Date();
+    const dateString = currentDateTime.toISOString().slice(0,10);
+    const timeString = currentDateTime.toISOString().slice(11,19);
 
-    if (date && time) {
-        return currentDateTime.toISOString();
-    }
+    if (isTime === undefined) return `${dateString} ${timeString}`;
 
-    if (!time) {
+    if (!isTime) return dateString;
 
-    }
-
-    if (!date) {
-
-    }
+    if (isTime) return timeString;
 };
 
 const getISOTimeStamp = () => {
@@ -19,16 +15,24 @@ const getISOTimeStamp = () => {
     return currentDateTime.toISOString();
 };
 
-const getDateDiff = (dateStr1, dateStr2) => {
-    const date1 = new Date(dateStr1);
-    const date2 = new Date(dateStr2);
-
-
+const getDateDiff = (prevDateStr, nextDateStr, isNegate = false) => {
+    const prevDate = new Date(prevDateStr).getTime();
+    const nextDate = new Date(nextDateStr).getTime();
+    
+    const microSecondsDiff = isNegate ? (prevDate - nextDate) : Math.abs(prevDate - nextDate);
+    
+    // milliseconds per day = 24 hrs * 60 minutes * 60 seconds * 1000 milliseconds
+    return Math.round(microSecondsDiff / (1000 * 60 * 60  * 24));
 };
 
-console.log(getTimeStamp());
+const daysDueCheck = (dueDateStr) => {
+    const dueDate = new Date(dueDateStr);
+    return (getDateDiff(dueDate, getISOTimeStamp(), true) < 0) ? true : false;
+};
 
-// module.exports = {
-//     getTimeStamp,
-//     getDateDiff
-// };
+module.exports = {
+    getTimeStamp,
+    getISOTimeStamp,
+    getDateDiff,
+    daysDueCheck
+};
