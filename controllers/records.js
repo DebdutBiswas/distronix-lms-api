@@ -24,7 +24,10 @@ exports.getAllRecords = async (req, res) => {
             });
         } else  {
             res.send({
-                'data': records.map(record => ({...record.dataValues, 'overdue': daysDueCheck(record.dataValues.due_date)}))
+                'data': records.map(record => (
+                        {...record.dataValues, 'overdue': daysDueCheck(record.dataValues.due_date)}
+                    )
+                )
             });
         }
     })
