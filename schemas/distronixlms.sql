@@ -24,7 +24,7 @@ CREATE TABLE `Books` (
 CREATE TABLE `Payments` (
   `id` int UNSIGNED NOT NULL,
   `record_id` int UNSIGNED NOT NULL,
-  `pay_amount` int UNSIGNED NOT NULL DEFAULT '0',
+  `pay_amount` double UNSIGNED NOT NULL DEFAULT '0',
   `pay_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_by` int UNSIGNED NOT NULL,
   `updated_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP

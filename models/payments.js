@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     pay_amount: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.DOUBLE.UNSIGNED,
       allowNull: false,
       defaultValue: 0
     },
