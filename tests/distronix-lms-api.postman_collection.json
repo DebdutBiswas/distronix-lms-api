@@ -1,0 +1,686 @@
+{
+	"info": {
+		"_postman_id": "c537322d-57bf-4699-9038-5c32052695a4",
+		"name": "distronix-lms-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "ramesh",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "ramesh@123",
+									"type": "default"
+								},
+								{
+									"key": "name",
+									"value": "Ramesh Das",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User By Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "ramesh123",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "ramesh123@123",
+									"type": "default"
+								},
+								{
+									"key": "name",
+									"value": "Ramesh Das",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "active",
+									"value": "true",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "role",
+									"value": "2",
+									"type": "default",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Books",
+			"item": [
+				{
+					"name": "Get All Books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Book",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "isbn",
+									"value": "977-8-6918-7196-6",
+									"type": "default"
+								},
+								{
+									"key": "name",
+									"value": "Book8",
+									"type": "default"
+								},
+								{
+									"key": "author",
+									"value": "Author1",
+									"type": "default"
+								},
+								{
+									"key": "publisher",
+									"value": "Publisher3",
+									"type": "default"
+								},
+								{
+									"key": "available",
+									"value": "8",
+									"type": "default"
+								},
+								{
+									"key": "lent",
+									"value": "0",
+									"type": "default"
+								},
+								{
+									"key": "active",
+									"value": "true",
+									"type": "default"
+								},
+								{
+									"key": "subject",
+									"value": "2",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Book By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/books/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"books",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Book By Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "isbn",
+									"value": "976-9-8602-5537-6",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "Book6",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "author",
+									"value": "Author3",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "publisher",
+									"value": "Publisher3",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "available",
+									"value": "10",
+									"type": "default"
+								},
+								{
+									"key": "lent",
+									"value": "3",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "active",
+									"value": "true",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "subject",
+									"value": "3",
+									"type": "default",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/books/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"books",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Book By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/books/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"books",
+								"8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Records",
+			"item": [
+				{
+					"name": "Get All Records",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/records",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"records"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Record",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "book_id",
+									"value": "6",
+									"type": "default"
+								},
+								{
+									"key": "user_id",
+									"value": "4",
+									"type": "default"
+								},
+								{
+									"key": "lent_date",
+									"value": "",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "due_date",
+									"value": "2022-01-22",
+									"type": "default"
+								},
+								{
+									"key": "returned",
+									"value": "",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "updated_by",
+									"value": "3",
+									"type": "default"
+								},
+								{
+									"key": "updated_on",
+									"value": "",
+									"type": "default",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/records",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"records"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Record By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/records/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"records",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Record By Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "due_date",
+									"value": "2022-01-05 19:39:04",
+									"type": "default"
+								},
+								{
+									"key": "returned",
+									"value": "",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "updated_by",
+									"value": "3",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/records/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"records",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Record By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/records/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"records",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payments",
+			"item": [
+				{
+					"name": "Get All Payments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/payments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Payment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "record_id",
+									"value": "5",
+									"type": "default"
+								},
+								{
+									"key": "pay_amount",
+									"value": "6.50",
+									"type": "default"
+								},
+								{
+									"key": "pay_date",
+									"value": "2022-01-03",
+									"type": "default"
+								},
+								{
+									"key": "updated_by",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "updated_on",
+									"value": "2022-01-09",
+									"type": "default",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/payments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Payment By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/payments/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"payments",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Payment By Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "pay_amount",
+									"value": "56",
+									"type": "default"
+								},
+								{
+									"key": "pay_date",
+									"value": "2022-01-08",
+									"type": "default"
+								},
+								{
+									"key": "updated_by",
+									"value": "2",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/payments/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"payments",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/payments/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"payments",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
