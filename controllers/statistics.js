@@ -1,6 +1,6 @@
 // router.get('/', statisticsController.getStatistics);
 
-const { DataTypes, Op, fn, col, where, query, QueryTypes } = require('sequelize');
+const { DataTypes, Op, fn, col, where } = require('sequelize');
 const db = require('../configs/database');
 const _recordsModel = require('../models/records');
 const _usersModel = require('../models/users');
@@ -19,6 +19,40 @@ exports.getStatistics = async (req, res) => {
     let total_users = '';
     let total_books = '';
     let total_lent_books = '';
+
+    // most_active_user
+    // await recordsModel.findAll({
+    await recordsModel.findOne({
+        attributes: [
+            'user_id',
+            [fn('count', col('user_id')), 'activeCount'],
+        ],
+        group: ['user_id'],
+        order: [['user_id', 'ASC']],
+        // limit: 3
+    })
+    .then(records => {
+        if (records === null || records.length === 0) {
+            most_active_user = 0;
+        } else {
+            (async () => {
+                await usersModel.findOne({where: {id: records.dataValues.user_id}, attributes: {exclude: ['password']}})
+                .then(users => {
+                    if (users === null || users.length === 0) {
+                        most_active_user = 0;
+                    } else {
+                        most_active_user = users;
+                    }
+                })
+                .catch(err => {
+                    most_active_user = { message: err.message || 'Something went wrong while getting list of users!' };
+                });
+            })();
+        }
+    })
+    .catch(err => {
+        most_active_user = { message: err.message || 'Something went wrong while getting list of records!' };
+    });
 
     // all books related stats
     await booksModel.findOne({attributes: [
@@ -41,7 +75,7 @@ exports.getStatistics = async (req, res) => {
 
             // oldest_book
             (async () => {
-                await booksModel.findOne({where: {reg_date: books.dataValues.oldestRegistered} , order: [['id', 'DESC']]})
+                await booksModel.findOne({where: {reg_date: books.dataValues.oldestRegistered}})
                 .then(books => {
                     if (books === null || books.length === 0) {
                         oldest_book = 0;
@@ -56,7 +90,7 @@ exports.getStatistics = async (req, res) => {
 
             // newest_book
             (async () => {
-                await booksModel.findOne({where: {reg_date: books.dataValues.newestRegistered} , order: [['id', 'DESC']]})
+                await booksModel.findOne({where: {reg_date: books.dataValues.newestRegistered}})
                 .then(books => {
                     if (books === null || books.length === 0) {
                         newest_book = 0;
@@ -115,7 +149,7 @@ exports.getStatistics = async (req, res) => {
     })
     .catch(err => {
         total_users = { message: err.message || 'Something went wrong while getting list of users!' };
-    });
+    });   
 
     res.send({
         'stats': {
