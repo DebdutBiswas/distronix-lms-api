@@ -681,6 +681,30 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Statistics",
+			"item": [
+				{
+					"name": "Get Statistics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/statistics",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"statistics"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
