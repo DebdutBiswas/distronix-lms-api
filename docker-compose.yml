@@ -12,10 +12,10 @@ services:
       - MYSQL_PASSWORD=distronixlms@12345
     ports:
       - "3306:3306"
+    restart: "on-failure"
     volumes:
       - distronixlmsdb-data:/var/lib/mysql
       - ./schemas/dummy.sql:/docker-entrypoint-initdb.d/dummy.sql
-    restart: "on-failure"
 
   distronixlmsapi:
     image: distronix-lms-api
@@ -30,9 +30,9 @@ services:
       dockerfile: distronix-lms-api.Dockerfile
     ports:
       - "3000:3000"
+    restart: "on-failure"
     volumes:
       - distronixlmsapi-data:/home/node/app
-    restart: "on-failure"
 
 volumes:
   distronixlmsdb-data:

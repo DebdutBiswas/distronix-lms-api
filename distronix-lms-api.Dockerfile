@@ -22,6 +22,7 @@ ARG DB_DBASE=distronixlms
 ENV DB_DBASE $DB_DBASE
 
 RUN apk update && apk add git
+RUN npm install pm2 -g
 RUN mkdir -p /home/node/app && chown -R node:node /home/node/app
 
 USER node
@@ -32,4 +33,4 @@ RUN mkdir -p /home/node/app/distronix-lms-api/node_modules
 RUN npm install
 
 EXPOSE 3000
-CMD [ "node", "app.js" ]
+CMD [ "pm2-runtime", "app.js" ]
