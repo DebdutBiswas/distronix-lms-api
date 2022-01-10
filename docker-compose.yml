@@ -15,6 +15,7 @@ services:
     volumes:
       - distronixlmsdb-data:/var/lib/mysql
       - ./schemas/dummy.sql:/docker-entrypoint-initdb.d/dummy.sql
+    restart: "on-failure"
 
   distronixlmsapi:
     image: distronix-lms-api
@@ -31,6 +32,7 @@ services:
       - "3000:3000"
     volumes:
       - distronixlmsapi-data:/home/node/app
+    restart: "on-failure"
 
 volumes:
   distronixlmsdb-data:
