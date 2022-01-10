@@ -26,7 +26,7 @@ RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
 
 USER node
 WORKDIR /home/node/app
-RUN git clone https://github.com/DebdutBiswas/distronix-lms-api.git
+RUN git clone https://github.com/DebdutBiswas/distronix-lms-api.git .
 RUN npm install
 
 EXPOSE 3000

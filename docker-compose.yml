@@ -14,7 +14,7 @@ services:
       - "3306:3306"
     volumes:
       - distronixlmsdb-data:/var/lib/mysql
-      - ./schemas:/docker-entrypoint-initdb.d
+      - ./schemas/dummy.sql:/docker-entrypoint-initdb.d/dummy.sql
 
   distronixlmsapi:
     image: distronix-lms-api
