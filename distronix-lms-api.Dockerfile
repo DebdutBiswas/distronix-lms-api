@@ -22,11 +22,13 @@ ARG DB_DBASE=distronixlms
 ENV DB_DBASE $DB_DBASE
 
 RUN apk update && apk add git
-RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
+RUN mkdir -p /home/node && chown -R node:node /home/node
 
 USER node
-WORKDIR /home/node/app
-RUN git clone https://github.com/DebdutBiswas/distronix-lms-api.git .
+WORKDIR /home/node
+RUN git clone https://github.com/DebdutBiswas/distronix-lms-api.git
+WORKDIR /home/node/app/distronix-lms-api
+RUN mkdir -p /home/node/distronix-lms-api/node_modules
 RUN npm install
 
 EXPOSE 3000
