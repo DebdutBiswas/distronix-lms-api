@@ -1,0 +1,37 @@
+version: '2'
+
+services:
+
+  distronixlmsdb:
+    image: mysql:8.0.27
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --default-authentication-plugin=mysql_native_password --init-file /docker-entrypoint-initdb.d/dummy.sql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root@12345
+      - MYSQL_DATABASE=distronixlms
+      - MYSQL_USER=distronixlms
+      - MYSQL_PASSWORD=distronixlms@12345
+    ports:
+      - "3306:3306"
+    volumes:
+      - distronixlmsdb-data:/var/lib/mysql
+      - ./schemas:/docker-entrypoint-initdb.d
+
+  distronixlmsapi:
+    image: distronix-lms-api
+    environment:
+      - DB_HOST=distronixlmsdb
+      - DB_PORT=3306
+      - DB_USER=distronixlms
+      - DB_PASS=distronixlms@12345
+      - DB_DBASE=distronixlms
+    build:
+      context: .
+      dockerfile: distronix-lms-api.Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - distronixlmsapi-data:/home/node/app
+
+volumes:
+  distronixlmsdb-data:
+  distronixlmsapi-data:
