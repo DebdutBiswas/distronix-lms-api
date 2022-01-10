@@ -33,4 +33,4 @@ RUN mkdir -p /home/node/app/distronix-lms-api/node_modules
 RUN npm install
 
 EXPOSE 3000
-CMD [ "pm2-runtime", "app.js" ]
+CMD [ "pm2-runtime", "--delay 5", "app.js" ]
