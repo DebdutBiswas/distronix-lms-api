@@ -2,6 +2,25 @@ version: '2'
 
 services:
 
+  distronixlmsapi:
+    image: distronix-lms-api
+    environment:
+      - DB_HOST=distronixlmsdb
+      - DB_PORT=3306
+      - DB_USER=distronixlms
+      - DB_PASS=distronixlms@12345
+      - DB_DBASE=distronixlms
+    build:
+      context: .
+      dockerfile: distronix-lms-api.Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - "distronixlmsdb"
+    restart: "on-failure"
+    volumes:
+      - distronixlmsapi-data:/home/node/app
+
   distronixlmsdb:
     image: mysql:8.0.27
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --default-authentication-plugin=mysql_native_password --init-file /docker-entrypoint-initdb.d/dummy.sql
@@ -16,23 +35,6 @@ services:
     volumes:
       - distronixlmsdb-data:/var/lib/mysql
       - ./schemas/dummy.sql:/docker-entrypoint-initdb.d/dummy.sql
-
-  distronixlmsapi:
-    image: distronix-lms-api
-    environment:
-      - DB_HOST=distronixlmsdb
-      - DB_PORT=3306
-      - DB_USER=distronixlms
-      - DB_PASS=distronixlms@12345
-      - DB_DBASE=distronixlms
-    build:
-      context: .
-      dockerfile: distronix-lms-api.Dockerfile
-    ports:
-      - "3000:3000"
-    restart: "on-failure"
-    volumes:
-      - distronixlmsapi-data:/home/node/app
 
 volumes:
   distronixlmsdb-data:
