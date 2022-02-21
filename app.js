@@ -35,14 +35,14 @@ app.get('/', (req, res) => {
 app.use('/auth', authRouter);
 
 // Auth middlewares
-app.use(authMiddleware);
+// app.use(authMiddleware);
 
 // App routes
-app.use('/users', usersRouter);
-app.use('/books', booksRouter);
-app.use('/records', recordsRouter);
-app.use('/payments', paymentsRouter);
-app.use('/statistics', statisticsRouter);
+app.use('/users', authMiddleware, usersRouter);
+app.use('/books', authMiddleware, booksRouter);
+app.use('/records', authMiddleware, recordsRouter);
+app.use('/payments', authMiddleware, paymentsRouter);
+app.use('/statistics', authMiddleware, statisticsRouter);
 
 // Invalid routes
 app.use('/*', (req, res)=>{
