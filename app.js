@@ -26,16 +26,16 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// Default routes
+app.get('/', (req, res) => {
+    res.json({"message": "Welcome to LMS API"});
+});
+
 // Auth route
 app.use('/auth', authRouter);
 
 // Auth middlewares
 app.use(authMiddleware);
-
-// Default routes
-app.get('/', (req, res) => {
-    res.json({"message": "Welcome to LMS API"});
-});
 
 // App routes
 app.use('/users', usersRouter);
