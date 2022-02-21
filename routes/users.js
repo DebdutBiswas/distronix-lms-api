@@ -8,8 +8,4 @@ router.get('/:id', usersController.getUserById);
 router.put('/:id', usersController.updateUserById);
 router.delete('/:id', usersController.deleteUserById);
 
-// auth
-router.post('/getToken', usersController.getToken);
-router.post('/refreshToken', usersController.refreshToken);
-
 module.exports = router;
