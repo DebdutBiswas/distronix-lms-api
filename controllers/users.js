@@ -7,9 +7,12 @@
 // auth
 // router.post('/getToken', usersController.getToken);
 // router.post('/refreshToken', usersController.refreshToken);
+// router.delete('/invalidateToken', usersController.invalidateToken);
 
+// const bcrypt = require('bcrypt');
 const { DataTypes, Op } = require('sequelize');
 const { sha256HashGen, sha256HashCheck } = require('../utils/hashlib');
+const auth = require('../configs/auth');
 const db = require('../configs/database');
 const _usersModel = require('../models/users');
 
@@ -152,9 +155,39 @@ exports.deleteUserById = async (req, res) => {
 };
 
 exports.getToken = async (req, res) => {
+    if (!req.body) {
+        return res.status(400).send({
+            message: 'Please fill all required field'
+        });
+    }
+    
+    await usersModel.findOne({where: {username: req.body.username, password: sha256HashGen(req.body.password)}})
+    .then(user => {
+        if (user !== null) {
+            const {password, ...userData} = user.dataValues;
+            
+            const accessToken = auth.generateAccessToken(userData, '60s');
+            const refreshToken = auth.generateRefreshToken(userData);
 
+            res.send({accessToken, refreshToken});
+        }
+        else {
+            res.status(401).send({
+                message: 'Unauthorized!'
+            });
+        }
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: err.message || 'Something went wrong!'
+        });
+    });
 };
 
 exports.refreshToken = async (req, res) => {
+
+};
+
+exports.invalidateToken = async (req, res) => {
 
 };
